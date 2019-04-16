@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
   @Id
   private String id;
@@ -23,7 +23,7 @@ public class User {
   @Column
   private String email;
 
-  @OneToMany(mappedBy = "notebook")
+  @OneToMany(mappedBy = "user")
   private List<Notebook> notebooks;
 
   public User() {}

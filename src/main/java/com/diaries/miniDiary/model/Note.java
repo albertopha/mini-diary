@@ -5,26 +5,24 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Note")
+@Table(name = "note")
 public class Note {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
   private String name;
   private Date dateCreated;
   private String content; //TODO: check if string is in html format
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_notebook")
+  @JoinColumn(name = "notebook_id")
   private Notebook notebook;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_playlist")
+  @JoinColumn(name = "playlist_id")
   private Playlist playlist;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_bookmark")
+  @OneToOne(mappedBy = "note")
   private Bookmark bookmark;
 
   public Long getId() {

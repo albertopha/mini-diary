@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Notebook")
+@Table(name = "notebook")
 public class Notebook {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +17,17 @@ public class Notebook {
   private String name;
   private Date dateCreated;
 
-  @OneToMany(mappedBy = "note")
+  @OneToMany(mappedBy = "notebook")
   private List<Note> notes;
 
-  @OneToMany(mappedBy = "bookmark")
+  @OneToMany(mappedBy = "notebook")
   private List<Bookmark> bookmarks;
 
-  @OneToMany(mappedBy = "playlist")
+  @OneToMany(mappedBy = "notebook")
   private List<Playlist> playlists;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "user")
+  @JoinColumn(name = "user_id")
   private User user;
 
   public Long getId() {

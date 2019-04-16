@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Playlist")
+@Table(name = "playlist")
 public class Playlist {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,11 +15,11 @@ public class Playlist {
   private String name;
   private Date dateCreated;
 
-  @OneToMany(mappedBy = "note")
+  @OneToMany(mappedBy = "playlist")
   private List<Note> notes;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_notebook")
+  @JoinColumn(name = "notebook_id")
   private Notebook notebook;
 
   public Long getId() {

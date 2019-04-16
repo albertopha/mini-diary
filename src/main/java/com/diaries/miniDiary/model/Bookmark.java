@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Bookmark")
+@Table(name = "bookmark")
 public class Bookmark {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,8 @@ public class Bookmark {
   private String name;
   private Date dateCreated;
 
-  @OneToOne(mappedBy = "note")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "note_id")
   private Note note;
 
   @ManyToOne(fetch = FetchType.LAZY)
