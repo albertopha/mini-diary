@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
+  Note save(Note note);
   List<Note> findAll();
   List<Note> findNotesByNotebookId(Long id);
   List<Note> findNotesByPlaylistId(Long id);

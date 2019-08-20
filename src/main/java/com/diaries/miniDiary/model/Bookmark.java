@@ -1,17 +1,16 @@
 package com.diaries.miniDiary.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "bookmark")
+@Table(name = "bookmarks")
 public class Bookmark {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.TABLE)
   private Long id;
   private String name;
-  private Date dateCreated;
+  private String dateCreated;
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "note_id")
@@ -22,7 +21,7 @@ public class Bookmark {
 
   public Bookmark() {}
 
-  public Bookmark(String name, Date date) {
+  public Bookmark(String name, String date) {
     this.name = name;
     this.dateCreated = date;
   }
@@ -43,11 +42,11 @@ public class Bookmark {
     this.name = name;
   }
 
-  public Date getDateCreated() {
+  public String getDateCreated() {
     return dateCreated;
   }
 
-  public void setDateCreated(Date dateCreated) {
+  public void setDateCreated(String dateCreated) {
     this.dateCreated = dateCreated;
   }
 

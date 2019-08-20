@@ -1,28 +1,33 @@
 package com.diaries.miniDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "note")
+@Table(name = "notes")
 public class Note {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.TABLE)
   private Long id;
   private String name;
-  private Date dateCreated;
+  private String dateCreated;
   private String content; //TODO: check if string is in html format
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+//  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   @JoinColumn(name = "notebook_id")
   private Notebook notebook;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+//  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   @JoinColumn(name = "playlist_id")
   private Playlist playlist;
 
   @OneToOne(mappedBy = "note")
+  @JsonIgnore
   private Bookmark bookmark;
 
   public Long getId() {
@@ -41,11 +46,11 @@ public class Note {
     this.name = name;
   }
 
-  public Date getDateCreated() {
+  public String getDateCreated() {
     return dateCreated;
   }
 
-  public void setDateCreated(Date dateCreated) {
+  public void setDateCreated(String dateCreated) {
     this.dateCreated = dateCreated;
   }
 

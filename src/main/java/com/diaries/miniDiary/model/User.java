@@ -1,5 +1,7 @@
 package com.diaries.miniDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -7,9 +9,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
   @Id
+  @GeneratedValue(strategy = GenerationType.TABLE)
   private String id;
 
   @NotNull
@@ -24,6 +27,7 @@ public class User {
   private String email;
 
   @OneToMany(mappedBy = "user")
+  @JsonIgnore
   private List<Notebook> notebooks;
 
   public User() {}

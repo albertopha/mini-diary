@@ -1,29 +1,33 @@
 package com.diaries.miniDiary.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "notebook")
+@Table(name = "notebooks")
 public class Notebook {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
   @NotNull
   private String name;
-  private Date dateCreated;
+  private String dateCreated;
 
   @OneToMany(mappedBy = "notebook")
+  @JsonIgnore
   private List<Note> notes;
 
   @OneToMany(mappedBy = "notebook")
+  @JsonIgnore
   private List<Bookmark> bookmarks;
 
   @OneToMany(mappedBy = "notebook")
+  @JsonIgnore
   private List<Playlist> playlists;
 
   @ManyToOne(fetch = FetchType.EAGER)
@@ -46,11 +50,11 @@ public class Notebook {
     this.name = name;
   }
 
-  public Date getDateCreated() {
+  public String getDateCreated() {
     return dateCreated;
   }
 
-  public void setDateCreated(Date dateCreated) {
+  public void setDateCreated(String dateCreated) {
     this.dateCreated = dateCreated;
   }
 
